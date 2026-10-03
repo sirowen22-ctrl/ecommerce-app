@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 export default function Header() {
   const { data: session } = useSession();
-  const totalItems = useCartStore((s) => s.totalItems());
+  const totalItems = useCartStore((s) => s.totalItems);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [search, setSearch] = useState("");
 
