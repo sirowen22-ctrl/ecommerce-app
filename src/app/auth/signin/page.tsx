@@ -1,3 +1,4 @@
+// Fixed Suspense boundary - force new commit
 "use client";
 
 import { signIn } from "next-auth/react";
