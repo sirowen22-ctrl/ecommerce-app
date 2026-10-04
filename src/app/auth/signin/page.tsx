@@ -1,19 +1,16 @@
-// Fixed Suspense boundary - force new commit
 "use client";
 
 import { signIn } from "next-auth/react";
 import Link from "next/link";
-import { useState, Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-function SignInForm() {
+export default function SignInPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,7 +27,7 @@ function SignInForm() {
       setError("Invalid email or password");
       setLoading(false);
     } else {
-      router.push(callbackUrl);
+      router.push("/");
       router.refresh();
     }
   };
@@ -46,9 +43,7 @@ function SignInForm() {
         )}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
             <input
               type="email"
               value={email}
@@ -59,9 +54,7 @@ function SignInForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">
-              Password
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
             <input
               type="password"
               value={password}
@@ -91,13 +84,5 @@ function SignInForm() {
         </div>
       </div>
     </div>
-  );
-}
-
-export default function SignInPage() {
-  return (
-    <Suspense fallback={<div className="min-h-[70vh] flex items-center justify-center">Loading...</div>}>
-      <SignInForm />
-    </Suspense>
   );
 }
